@@ -44,10 +44,10 @@ int main() {
                 break;
             }
         }
+
         numberOfZeroes++; //tracking the number of zeroes in the string
         printf("This is the string after %s\n", str);
         strcpy(outerStr,str);
-        if(strcmp("011001",str) == 0) printf("\n\n\n\nHere is the missing permutation!\n\n\n\n");
         permutationRecorded = false;
         for(int eachElement = 1; eachElement < fib2; eachElement++){
             if(strcmp(str,res[eachElement]) == 0){
@@ -71,7 +71,6 @@ int main() {
                 startpos = 0;
                 foundFirstOne = 0;
                 printf("String before looking for first zero %s\n",str);
-                if(strcmp("011001",str) == 0) printf("\n\n\n\nHere is the missing permutation!\n\n\n\n");
                 for (indexOne = 0; indexOne < currentLen; ++indexOne) { //foundFirstOne == 0 //00111
                     if(str[indexOne] == '0' && foundFirstOne == 0){ //keep searching for the right 0
                         startpos++;
@@ -141,7 +140,6 @@ int main() {
                         }
                         else printf("Permutation found %s, but already present in record\n", assistStr1);
                     }
-                    if(strcmp("011001",str) == 0) printf("\n\n\n\nHere is the missing permutation!\n\n\n\n");
                     permutationRecorded = false;
                     for(int eachElement = 1; eachElement < fib2; eachElement++){
                         if(strcmp(str,res[eachElement]) == 0){
@@ -169,7 +167,32 @@ int main() {
                 str[indexOne] = str[indexOne - 1];
             }
             str[0] = change;
-            if(strcmp("011001",str) == 0) printf("\n\n\n\nHere is the missing permutation! FOUR %s\n\n\n\n",str);
+
+            strcpy(assistStr1, str);
+            for (int eachItem = 0; eachItem < currentLen; ++eachItem) {
+                change = assistStr1[currentLen - 1];
+                for (int eachValue = currentLen - 1; eachValue >= 0; --eachValue) {
+                    assistStr1[eachValue] = assistStr1[eachValue - 1];
+                }
+                assistStr1[0] = change;
+
+                permutationRecorded = false;
+                for(int eachElement = 1; eachElement < fib2; eachElement++){
+                    if(strcmp(assistStr1,res[eachElement]) == 0){
+                        printf("Match THREE found %s\n", res[eachElement]);
+                        permutationRecorded = true;}
+                }
+                if(permutationRecorded == false){
+                    for(int eachElement = 1; eachElement < fib2; eachElement++)
+                        if(res[eachElement][0] == '2'){
+                            temp = eachElement;
+                            strcpy(res[temp],assistStr1);
+                            printf("Permutation found %s and recorded in result %s\n", assistStr1, res[temp]);
+                            break;}
+                }
+                else printf("Permutation found %s, but already present in record\n", assistStr1);
+            }
+
             translatedZeroes = 0;       //check if all zeroes are in the right side of the string, e.g. 111000, this means translatedZeroes == 2
             for (indexOne = currentLen - 1; indexOne >= 0; --indexOne) {
                 if (str[indexOne] == '1' && translatedZeroes == 0) {
@@ -193,6 +216,6 @@ int main() {
         if(res[eachCharacter][0]!='2') temp++;
         printf("%s\n",res[eachCharacter]);
     }
-    printf("%d options found\n",temp);
+    printf("%d options found\nFIB NUMBER %d\n\n",temp,fib2);
     return 0;
 }
