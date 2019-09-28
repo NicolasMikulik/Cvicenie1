@@ -29,13 +29,13 @@ int main() {
     res[0][size]='\0';
     strcpy(innerStr,str);
     strcpy(outerStr,str);
-    printf("%s\n",str); //original string
+    //printf("%s\n",str); //original string
     int startpos = 0, foundFirstOne = 0, translatedZeroes = 2, numberOfZeroes = 0;
     char change;
     char lastChar;
 
     for(charPos=0;charPos<(size/2);charPos++) { //the horizontal tile takes up two spaces, so maximum length of permutation full of horizontal tiles is size/2
-        printf("This is the string before changing 1 and 0 and before rotation %s\n", str);
+        //printf("This is the string before changing 1 and 0 and before rotation %s\n", str);
         strcpy(str,outerStr);
         str[--currentLen] = '\0';
         for (indexOne = 0; indexOne < currentLen; indexOne++) {
@@ -46,12 +46,12 @@ int main() {
         }
 
         numberOfZeroes++; //tracking the number of zeroes in the string
-        printf("This is the string after %s\n", str);
+        //printf("This is the string after %s\n", str);
         strcpy(outerStr,str);
         permutationRecorded = false;
         for(int eachElement = 1; eachElement < fib2; eachElement++){
             if(strcmp(str,res[eachElement]) == 0){
-                printf("Match ONE found %s\n", res[eachElement]);
+                //printf("Match ONE found %s\n", res[eachElement]);
                 permutationRecorded = true;}
         }
         if(permutationRecorded == false){
@@ -59,10 +59,10 @@ int main() {
                 if(res[eachElement][0] == '2'){
                     temp = eachElement;
                     strcpy(res[temp],str);
-                    printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
+                    //printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
                     break;}
         }
-        else printf("Permutation found %s, but already present in record\n", str);
+        //else printf("Permutation found %s, but already present in record\n", str);
 
         zeroesRemaining = true;
         while(zeroesRemaining) { //this loops keeps processing and altering one string as long as all the zeroes are not on the right side to begin with, e.g. 111000
@@ -70,7 +70,7 @@ int main() {
             for (indexThree = 0; indexThree < numberOfZeroes; ++indexThree) {
                 startpos = 0;
                 foundFirstOne = 0;
-                printf("String before looking for first zero %s\n",str);
+                //printf("String before looking for first zero %s\n",str);
                 for (indexOne = 0; indexOne < currentLen; ++indexOne) { //foundFirstOne == 0 //00111
                     if(str[indexOne] == '0' && foundFirstOne == 0){ //keep searching for the right 0
                         startpos++;
@@ -91,12 +91,12 @@ int main() {
                     startpos++;
                 }
                 startpos--;
-                printf("Startpos %d\n", startpos);
+                //printf("Startpos %d\n", startpos);
 
                 permutationRecorded = false;
                 for(int eachElement = 1; eachElement < fib2; eachElement++){
                     if(strcmp(str,res[eachElement]) == 0){
-                        printf("Match TWO found %s\n", res[eachElement]);
+                        //printf("Match TWO found %s\n", res[eachElement]);
                         permutationRecorded = true;}
                 }
                 if(permutationRecorded == false){
@@ -104,10 +104,10 @@ int main() {
                         if(res[eachElement][0] == '2'){
                             temp = eachElement;
                             strcpy(res[temp],str);
-                            printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
+                            //printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
                             break;}
                 }
-                else printf("Permutation found %s, but already present in record\n", str);
+                //else printf("Permutation found %s, but already present in record\n", str);
 
                 for (indexTwo = startpos; indexTwo < currentLen - 1; indexTwo++) {    //moving the '0' to the right, creating permutations
                     if(str[indexTwo] == str[indexTwo + 1])
@@ -127,7 +127,7 @@ int main() {
                         permutationRecorded = false;
                         for(int eachElement = 1; eachElement < fib2; eachElement++){
                             if(strcmp(assistStr1,res[eachElement]) == 0){
-                                printf("Match THREE found %s\n", res[eachElement]);
+                                //printf("Match THREE found %s\n", res[eachElement]);
                                 permutationRecorded = true;}
                         }
                         if(permutationRecorded == false){
@@ -135,15 +135,15 @@ int main() {
                                 if(res[eachElement][0] == '2'){
                                     temp = eachElement;
                                     strcpy(res[temp],assistStr1);
-                                    printf("Permutation found %s and recorded in result %s\n", assistStr1, res[temp]);
+                                    //printf("Permutation found %s and recorded in result %s\n", assistStr1, res[temp]);
                                     break;}
                         }
-                        else printf("Permutation found %s, but already present in record\n", assistStr1);
+                        //else printf("Permutation found %s, but already present in record\n", assistStr1);
                     }
                     permutationRecorded = false;
                     for(int eachElement = 1; eachElement < fib2; eachElement++){
                         if(strcmp(str,res[eachElement]) == 0){
-                            printf("Match THREE found %s\n", res[eachElement]);
+                            //printf("Match THREE found %s\n", res[eachElement]);
                             permutationRecorded = true;}
                     }
                     if(permutationRecorded == false){
@@ -151,12 +151,12 @@ int main() {
                             if(res[eachElement][0] == '2'){
                                 temp = eachElement;
                                 strcpy(res[temp],str);
-                                printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
+                                //printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
                                 break;}
                     }
-                    else printf("Permutation found %s, but already present in record\n", str);
+                    //else printf("Permutation found %s, but already present in record\n", str);
 
-                    printf("%s\n", str);
+                    //printf("%s\n", str);
                 }
 
 
@@ -179,7 +179,7 @@ int main() {
                 permutationRecorded = false;
                 for(int eachElement = 1; eachElement < fib2; eachElement++){
                     if(strcmp(assistStr1,res[eachElement]) == 0){
-                        printf("Match THREE found %s\n", res[eachElement]);
+                        //printf("Match THREE found %s\n", res[eachElement]);
                         permutationRecorded = true;}
                 }
                 if(permutationRecorded == false){
@@ -187,10 +187,10 @@ int main() {
                         if(res[eachElement][0] == '2'){
                             temp = eachElement;
                             strcpy(res[temp],assistStr1);
-                            printf("Permutation found %s and recorded in result %s\n", assistStr1, res[temp]);
+                            //printf("Permutation found %s and recorded in result %s\n", assistStr1, res[temp]);
                             break;}
                 }
-                else printf("Permutation found %s, but already present in record\n", assistStr1);
+                //else printf("Permutation found %s, but already present in record\n", assistStr1);
             }
 
             translatedZeroes = 0;       //check if all zeroes are in the right side of the string, e.g. 111000, this means translatedZeroes == 2
@@ -205,17 +205,33 @@ int main() {
             if (translatedZeroes != 2) {
                 zeroesRemaining = false;
             }
-            printf("Checked string %s and translated zeroes all in the right %d\n", str, translatedZeroes);
-            //strcpy(outerStr,str);
-            //horizAtEnd = false;
+            //printf("Checked string %s and translated zeroes all in the right %d\n", str, translatedZeroes);
         }
     }
-    printf("%s\n\n",str); //permutation composed of only zeroes or zeroes and a one
+    //printf("%s\n\n",str); //permutation composed of only zeroes or zeroes and a one
+    temp=0;
+    for (int eachItem = 0; eachItem < fib2; ++eachItem) {
+        if(res[eachItem][0]!='2') temp++;
+        for (int eachCharacter = 0; eachCharacter < strlen(res[eachItem]); ++eachCharacter) {
+            if(res[eachItem][eachCharacter] == '0') res[eachItem][eachCharacter] = '=';
+            if(res[eachItem][eachCharacter] == '1') res[eachItem][eachCharacter] = '|';
+        }
+        printf("%s\n",res[eachItem]);
+    }
+    printf("%d options found\nFIB NUMBER %d\n\n",temp,fib2);
+    for (int eachOne = 0; eachOne < fib2; ++eachOne) {
+        for (int eachTwo = 0; eachTwo < fib2; ++eachTwo) {
+            if(strcmp(res[eachOne],res[eachTwo])<0){
+                strcpy(assistStr1,res[eachOne]);
+                strcpy(res[eachOne],res[eachTwo]);
+                strcpy(res[eachTwo],assistStr1);}
+        }
+    }
+
     temp=0;
     for (int eachCharacter = 0; eachCharacter < fib2; ++eachCharacter) {
         if(res[eachCharacter][0]!='2') temp++;
         printf("%s\n",res[eachCharacter]);
     }
-    printf("%d options found\nFIB NUMBER %d\n\n",temp,fib2);
     return 0;
 }
