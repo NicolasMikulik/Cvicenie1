@@ -58,9 +58,11 @@ int main() {
             for(int eachElement = 1; eachElement < fib2; eachElement++)
                 if(res[eachElement][0] == '2'){
                     temp = eachElement;
+                    strcpy(res[temp],str);
+                    printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
                     break;}
-            strcpy(res[temp],str);
-            printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
+            //strcpy(res[temp],str);
+            //printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
         }
         else printf("Permutation found %s, but already present in record\n", str);
 
@@ -93,6 +95,25 @@ int main() {
                 }
                 startpos--;
                 printf("Startpos %d\n", startpos);
+
+                permutationRecorded = false;
+                for(int eachElement = 1; eachElement < fib2; eachElement++){
+                    if(strcmp(str,res[eachElement]) == 0){
+                        printf("Match found %s\n", res[eachElement]);
+                        permutationRecorded = true;}
+                }
+                if(permutationRecorded == false){
+                    for(int eachElement = 1; eachElement < fib2; eachElement++)
+                        if(res[eachElement][0] == '2'){
+                            temp = eachElement;
+                            strcpy(res[temp],str);
+                            printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
+                            break;}
+                    //strcpy(res[temp],str);
+                    //printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
+                }
+                else printf("Permutation found %s, but already present in record\n", str);
+
                 for (indexTwo = startpos; indexTwo < currentLen - 1; indexTwo++) {    //moving the '0' to the right, creating permutations
                     change = str[indexTwo];
                     str[indexTwo] = str[indexTwo + 1];
