@@ -118,6 +118,25 @@ int main() {
                     change = str[indexTwo];
                     str[indexTwo] = str[indexTwo + 1];
                     str[indexTwo + 1] = change;
+
+                    permutationRecorded = false;
+                    for(int eachElement = 1; eachElement < fib2; eachElement++){
+                        if(strcmp(str,res[eachElement]) == 0){
+                            printf("Match found %s\n", res[eachElement]);
+                            permutationRecorded = true;}
+                    }
+                    if(permutationRecorded == false){
+                        for(int eachElement = 1; eachElement < fib2; eachElement++)
+                            if(res[eachElement][0] == '2'){
+                                temp = eachElement;
+                                strcpy(res[temp],str);
+                                printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
+                                break;}
+                        //strcpy(res[temp],str);
+                        //printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
+                    }
+                    else printf("Permutation found %s, but already present in record\n", str);
+
                     printf("%s\n", str);
                 }
             }
@@ -145,8 +164,8 @@ int main() {
             //horizAtEnd = false;
         }
     }
-    printf("%s\n",str); //original string
-    strcpy(res[fib2-1],str);
+    printf("%s\n\n",str); //permutation composed of only zeroes or zeroes and a one
+    //strcpy(res[fib2-1],str);
     for (int eachCharacter = 0; eachCharacter < fib2; ++eachCharacter) {
         printf("%s\n",res[eachCharacter]);
     }
