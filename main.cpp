@@ -7,7 +7,7 @@ int main() {
     char str[size+1], innerStr[size+1], outerStr[size+1];
     int fib1 = 1, fib2 = 1, sum = 0, order = 1, temp = 0; //variables for counting the number of permutations
     int currentLen = size; //length of the string the program is currently working with
-    bool zeroesRemaining = false;
+    bool zeroesRemaining = false, permutationRecorded = false;
 
     while(order<size) {
         temp = fib1 + fib2;
@@ -19,6 +19,11 @@ int main() {
     for(charPos=0;charPos<size;charPos++){
         str[charPos]='1';
         res[0][charPos]='1';
+    }
+
+    for (int eachElement = 1; eachElement < fib2 ; ++eachElement) {
+        res[eachElement][0] = '2';
+        res[eachElement][1] = '\0';
     }
     str[size]='\0'; //prepare the string to be permutated
     res[0][size]='\0';
@@ -42,13 +47,31 @@ int main() {
         numberOfZeroes++; //tracking the number of zeroes in the string
         printf("This is the string after %s\n", str);
         strcpy(outerStr,str);
-        translatedZeroes = 2;
-        while(translatedZeroes == 2) {
+
+        permutationRecorded = false;
+        for(int eachElement = 1; eachElement < fib2; eachElement++){
+            if(strcmp(str,res[eachElement]) == 0){
+                printf("Match found %s\n", res[eachElement]);
+                permutationRecorded = true;}
+        }
+        if(permutationRecorded == false){
+            for(int eachElement = 1; eachElement < fib2; eachElement++)
+                if(res[eachElement][0] == '2'){
+                    temp = eachElement;
+                    break;}
+            strcpy(res[temp],str);
+            printf("Permutation found %s and recorded in result %s\n", str, res[temp]);
+        }
+        else printf("Permutation found %s, but already present in record\n", str);
+
+        //translatedZeroes = 2;
+        zeroesRemaining = true;
+        while(zeroesRemaining) { //this loops keeps processing and altering one string as long as all the zeroes are not on the right side to begin with, e.g. 111000
             strcpy(innerStr, str);
             for (indexThree = 0; indexThree < numberOfZeroes; ++indexThree) {
                 startpos = 0;
                 foundFirstOne = 0;
-                printf("String Before looking for first one %s\n",str);
+                printf("String before looking for first zero %s\n",str);
                 for (indexOne = 0; indexOne < currentLen; ++indexOne) { //foundFirstOne == 0 //00111
                     if(str[indexOne] == '0' && foundFirstOne == 0){ //keep searching for the right 0
                         startpos++;
@@ -102,6 +125,10 @@ int main() {
         }
     }
     printf("%s\n",str); //original string
+    strcpy(res[fib2-1],str);
+    for (int eachCharacter = 0; eachCharacter < fib2; ++eachCharacter) {
+        printf("%s\n",res[eachCharacter]);
+    }
     return 0;
 }
 
